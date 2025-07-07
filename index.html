@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>Bliss Trade</title>
     <style>
         :root {
@@ -15,18 +15,23 @@
             --text-gray: #e0e0e0;
             --card-bg: #1a1a2e;
         }
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
         body {
-            font-family: 'Arial', sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             margin: 0;
             padding: 0;
             background-color: var(--primary-dark);
             color: var(--text-light);
-            line-height: 1.6;
+            line-height: 1.5;
+            touch-action: manipulation;
         }
         .header-block {
             background: linear-gradient(135deg, var(--primary-dark), var(--primary));
             color: var(--text-light);
-            padding: 40px 20px;
+            padding: 30px 15px;
             text-align: center;
             position: relative;
             overflow: hidden;
@@ -37,79 +42,70 @@
             bottom: 0;
             left: 0;
             right: 0;
-            height: 5px;
+            height: 4px;
             background: linear-gradient(90deg, var(--accent), #ff6b00);
         }
         .container {
-            max-width: 600px;
+            max-width: 100%;
             margin: 0 auto;
-            padding: 20px;
+            padding: 15px;
+            width: 100%;
         }
         h1 {
-            font-size: 1.8rem;
-            margin-bottom: 15px;
+            font-size: 1.5rem;
+            margin-bottom: 12px;
             text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            font-weight: 700;
         }
         .survey-description {
-            font-size: 1rem;
-            margin-bottom: 30px;
+            font-size: 0.95rem;
+            margin-bottom: 20px;
             color: var(--text-gray);
+            line-height: 1.4;
         }
         .survey-form {
             background: var(--card-bg);
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
-            margin-bottom: 30px;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+            margin-bottom: 20px;
         }
         .form-group {
-            margin-bottom: 25px;
+            margin-bottom: 20px;
         }
         .form-group label {
             display: block;
-            margin-bottom: 10px;
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-        .form-control {
-            width: 100%;
-            padding: 12px 15px;
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            border-radius: 6px;
-            color: var(--text-light);
+            margin-bottom: 8px;
+            font-weight: 600;
             font-size: 1rem;
-            transition: all 0.3s;
-            margin-bottom: 10px;
-        }
-        .form-control:focus {
-            outline: none;
-            border-color: var(--accent);
-            background: rgba(255,255,255,0.15);
         }
         .radio-group {
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 8px;
         }
         .radio-option {
             display: flex;
             align-items: center;
-            padding: 10px 15px;
+            padding: 12px 15px;
             background: rgba(255,255,255,0.05);
-            border-radius: 6px;
+            border-radius: 8px;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.2s;
+            -webkit-user-select: none;
+            user-select: none;
         }
         .radio-option:hover {
             background: rgba(255,255,255,0.1);
         }
         .radio-option input {
             margin-right: 10px;
+            min-width: 18px;
+            min-height: 18px;
         }
         .btn {
             display: inline-block;
-            padding: 15px 35px;
+            padding: 14px 20px;
             background: linear-gradient(to right, var(--accent), #ff6b00);
             color: #1a1a1a;
             text-align: center;
@@ -118,67 +114,64 @@
             font-weight: bold;
             cursor: pointer;
             border: none;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 157, 0, 0.3);
+            font-size: 0.95rem;
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 10px rgba(255, 157, 0, 0.3);
             text-transform: uppercase;
-            letter-spacing: 1px;
-            font-weight: 800;
-            margin-top: 10px;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            margin-top: 8px;
             width: 100%;
+            -webkit-appearance: none;
         }
-        .btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(255, 157, 0, 0.4);
+        .btn:hover, .btn:active {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(255, 157, 0, 0.4);
             background: linear-gradient(to right, var(--accent-hover), #ff8c00);
         }
         .btn:disabled {
             opacity: 0.6;
             cursor: not-allowed;
             transform: none;
-            box-shadow: 0 4px 15px rgba(255, 157, 0, 0.3);
+            box-shadow: 0 4px 10px rgba(255, 157, 0, 0.3);
         }
         .progress-container {
             width: 100%;
             background: rgba(255,255,255,0.1);
-            border-radius: 10px;
-            margin-bottom: 30px;
-            height: 10px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            height: 8px;
             overflow: hidden;
         }
         .progress-bar {
             height: 100%;
             background: linear-gradient(90deg, var(--accent), #ff6b00);
             width: 0%;
-            transition: width 0.4s ease;
+            transition: width 0.3s ease;
         }
         .question-number {
             text-align: center;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             color: var(--text-gray);
-            font-size: 0.9rem;
+            font-size: 0.85rem;
         }
         .hidden {
             display: none;
         }
         .thank-you {
             text-align: center;
-            padding: 40px 20px;
+            padding: 30px 15px;
         }
         .thank-you h2 {
-            font-size: 2rem;
+            font-size: 1.6rem;
             margin-bottom: 20px;
             color: var(--accent);
+            font-weight: 700;
         }
-        @media (min-width: 768px) {
-            h1 {
-                font-size: 2.2rem;
-            }
-            .survey-description {
-                font-size: 1.1rem;
-            }
-            .btn {
-                font-size: 1.1rem;
+        @media (min-width: 400px) {
+            .container {
+                padding: 20px;
+                max-width: 400px;
             }
         }
     </style>
@@ -195,19 +188,12 @@
         <div class="progress-container">
             <div class="progress-bar" id="progressBar"></div>
         </div>
-        <div class="question-number" id="questionNumber">Вопрос 1 из 7</div>
+        <div class="question-number" id="questionNumber">Вопрос 1 из 6</div>
 
         <form id="surveyForm" class="survey-form">
             <!-- Вопрос 1 -->
             <div class="form-group" id="question1">
-                <label>1. Ваши контактные данные</label>
-                <input type="text" id="userName" class="form-control" placeholder="Ваше имя" required>
-                <input type="text" id="userTelegram" class="form-control" placeholder="Ваш Telegram @username" required>
-            </div>
-
-            <!-- Вопрос 2 -->
-            <div class="form-group hidden" id="question2">
-                <label>2. Вам есть 18 лет?</label>
+                <label>1. Вам есть 18 лет?</label>
                 <div class="radio-group">
                     <label class="radio-option">
                         <input type="radio" name="age" value="Да"> Да
@@ -218,9 +204,9 @@
                 </div>
             </div>
 
-            <!-- Вопрос 3 -->
-            <div class="form-group hidden" id="question3">
-                <label>3. Был/есть опыт в P2P?</label>
+            <!-- Вопрос 2 -->
+            <div class="form-group hidden" id="question2">
+                <label>2. Был/есть опыт в P2P?</label>
                 <div class="radio-group">
                     <label class="radio-option">
                         <input type="radio" name="p2p" value="Да"> Да
@@ -231,9 +217,9 @@
                 </div>
             </div>
 
-            <!-- Вопрос 4 -->
-            <div class="form-group hidden" id="question4">
-                <label>4. Какой у вас сейчас доход?</label>
+            <!-- Вопрос 3 -->
+            <div class="form-group hidden" id="question3">
+                <label>3. Какой у вас сейчас доход?</label>
                 <div class="radio-group">
                     <label class="radio-option">
                         <input type="radio" name="income" value="до 500$"> до 500$
@@ -247,9 +233,9 @@
                 </div>
             </div>
 
-            <!-- Вопрос 5 -->
-            <div class="form-group hidden" id="question5">
-                <label>5. Сколько вы бы хотели зарабатывать?</label>
+            <!-- Вопрос 4 -->
+            <div class="form-group hidden" id="question4">
+                <label>4. Сколько вы бы хотели зарабатывать?</label>
                 <div class="radio-group">
                     <label class="radio-option">
                         <input type="radio" name="desired_income" value="1000-1500$"> 1000-1500$
@@ -263,9 +249,9 @@
                 </div>
             </div>
 
-            <!-- Вопрос 6 -->
-            <div class="form-group hidden" id="question6">
-                <label>6. Сколько времени готовы уделять работе на нашей платформе?</label>
+            <!-- Вопрос 5 -->
+            <div class="form-group hidden" id="question5">
+                <label>5. Сколько времени готовы уделять работе на нашей платформе?</label>
                 <div class="radio-group">
                     <label class="radio-option">
                         <input type="radio" name="time" value="1-2 часа"> 1-2 часа
@@ -279,9 +265,9 @@
                 </div>
             </div>
 
-            <!-- Вопрос 7 -->
-            <div class="form-group hidden" id="question7">
-                <label>7. Готовы пройти обучение и начать работу?</label>
+            <!-- Вопрос 6 -->
+            <div class="form-group hidden" id="question6">
+                <label>6. Готовы пройти обучение и начать работу?</label>
                 <div class="radio-group">
                     <label class="radio-option">
                         <input type="radio" name="ready" value="Да"> Да
@@ -292,7 +278,7 @@
                 </div>
             </div>
 
-            <button type="button" id="prevBtn" class="btn hidden" style="background: var(--primary-light); margin-bottom: 10px;">Назад</button>
+            <button type="button" id="prevBtn" class="btn hidden" style="background: var(--primary-light); margin-bottom: 8px;">Назад</button>
             <button type="button" id="nextBtn" class="btn">Далее</button>
         </form>
 
@@ -321,30 +307,13 @@
             // Обработчик кнопки "Далее"
             nextBtn.addEventListener('click', function() {
                 const currentQ = questions[currentQuestion];
-                let isValid = true;
+                const radioInputs = currentQ.querySelectorAll('input[type="radio"]');
+                const checkedInput = Array.from(radioInputs).some(input => input.checked);
                 
-                // Проверяем, заполнен ли текущий вопрос
-                if (currentQuestion === 0) {
-                    // Проверка для первого вопроса с двумя полями ввода
-                    const nameInput = document.getElementById('userName');
-                    const telegramInput = document.getElementById('userTelegram');
-                    
-                    if (nameInput.value.trim() === '' || telegramInput.value.trim() === '') {
-                        alert('Пожалуйста, заполните оба поля');
-                        isValid = false;
-                    }
-                } else {
-                    // Проверка для радио-кнопок
-                    const radioInputs = currentQ.querySelectorAll('input[type="radio"]');
-                    const checkedInput = Array.from(radioInputs).some(input => input.checked);
-                    
-                    if (radioInputs.length > 0 && !checkedInput) {
-                        alert('Пожалуйста, выберите один из вариантов');
-                        isValid = false;
-                    }
+                if (!checkedInput) {
+                    alert('Пожалуйста, выберите один из вариантов');
+                    return;
                 }
-                
-                if (!isValid) return;
                 
                 // Если это последний вопрос, отправляем форму
                 if (currentQuestion === questions.length - 1) {
@@ -383,8 +352,6 @@
             function submitForm() {
                 // Собираем данные формы
                 const formData = {
-                    name: document.getElementById('userName').value,
-                    telegram: document.getElementById('userTelegram').value,
                     age: document.querySelector('input[name="age"]:checked')?.value,
                     p2p: document.querySelector('input[name="p2p"]:checked')?.value,
                     income: document.querySelector('input[name="income"]:checked')?.value,
@@ -396,25 +363,16 @@
                 console.log('Form data:', formData); // Для отладки
                 
                 // Здесь можно добавить код для отправки данных на сервер
-                // Например, с помощью fetch или XMLHttpRequest
                 
                 // Показываем сообщение благодарности
                 form.classList.add('hidden');
                 thankYou.classList.remove('hidden');
                 
-                // Устанавливаем таймер перенаправления через 5 секунд
+                // Перенаправляем через 5 секунд
                 redirectTimer = setTimeout(() => {
                     window.location.href = 'https://bliss-trade.github.io/platform/';
                 }, 5000);
             }
-            
-            // Обработчик нажатия Enter для текстовых полей
-            form.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter' && currentQuestion === 0) {
-                    e.preventDefault();
-                    nextBtn.click();
-                }
-            });
         });
     </script>
 </body>

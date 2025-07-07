@@ -170,10 +170,6 @@
             margin-bottom: 20px;
             color: var(--accent);
         }
-        .thank-you p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-        }
         @media (min-width: 768px) {
             h1 {
                 font-size: 2.2rem;
@@ -302,7 +298,7 @@
 
         <div id="thankYou" class="thank-you hidden">
             <h2>Спасибо за ответы!</h2>
-            <a href="https://bliss-trade.github.io/platform/" class="btn">Перейти на платформу</a>
+            <a href="https://bliss-trade.github.io/platform/" class="btn">ПЕРЕЙТИ НА ГЛАВНУЮ</a>
         </div>
     </div>
 
@@ -317,6 +313,7 @@
             const thankYou = document.getElementById('thankYou');
             
             let currentQuestion = 0;
+            let redirectTimer;
             
             // Показываем первый вопрос
             showQuestion(currentQuestion);
@@ -404,6 +401,11 @@
                 // Показываем сообщение благодарности
                 form.classList.add('hidden');
                 thankYou.classList.remove('hidden');
+                
+                // Устанавливаем таймер перенаправления через 5 секунд
+                redirectTimer = setTimeout(() => {
+                    window.location.href = 'https://bliss-trade.github.io/platform/';
+                }, 5000);
             }
             
             // Обработчик нажатия Enter для текстовых полей

@@ -302,8 +302,7 @@
 
         <div id="thankYou" class="thank-you hidden">
             <h2>Спасибо за ответы!</h2>
-            <p>Мы анализируем ваши данные и скоро свяжемся с вами в Telegram</p>
-            <a href="https://bliss-trade.github.io/" class="btn">Перейти на главную</a>
+            <a href="https://bliss-trade.github.io/platform/" class="btn">Перейти на платформу</a>
         </div>
     </div>
 
@@ -405,11 +404,6 @@
                 // Показываем сообщение благодарности
                 form.classList.add('hidden');
                 thankYou.classList.remove('hidden');
-                
-                // Перенаправляем на лендинг через 5 секунд
-                setTimeout(() => {
-                    window.location.href = 'https://bliss-trade.github.io/';
-                }, 5000);
             }
             
             // Обработчик нажатия Enter для текстовых полей
